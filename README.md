@@ -2,30 +2,30 @@
 
 ![Poneglyph Banner](assets/banner.jpg)
 
-> **Poneglyph** é um serviço autônomo em Python com Docker que monitora novos lançamentos de One Piece, faz o download automatizado das páginas em alta qualidade, gera arquivos de quadrinhos digitais (**CBR**) e entrega tudo diretamente no seu chat do Telegram com suporte a comandos interativos.
+> **Poneglyph** é uma automação feita em Python que monitora novos capítulos de One Piece, faz o download automatizado das páginas em alta qualidade, gera arquivos de quadrinhos digitais (**CBR**) e envia tudo diretamente no seu chat do Telegram com suporte a comandos interativos.
 
 
 ---
 
-## ⚡ Principais Funcionalidades
+## Principais Funcionalidades
 
-- 🔄 **Monitoramento Contínuo**: Checa periodicamente se há novos capítulos lançados no portal de mangás.
-- 📥 **Scraper & Downloader Paralelo**: Faz download das páginas em alta resolução preservando a ordem de leitura.
-- 📚 **Empacotador CBR**: Agrupa as imagens em formato digital de quadrinhos `.cbr` (Comic Book RAR/ZIP) para leitura em apps como Tachiyomi, Mihon, CDisplayEx ou YACReader.
-- 🤖 **Bot Interativo do Telegram**:
+- **Monitoramento Contínuo**: Checa periodicamente se há novos capítulos lançados no site que publica o mangá.
+- **Scraper & Downloader Paralelo**: Faz download das páginas em alta resolução preservando a ordem de leitura.
+- **Empacotador CBR**: Agrupa as imagens em formato digital de quadrinhos `.cbr` (Comic Book RAR/ZIP) para leitura em apps como Tachiyomi, Mihon, CDisplayEx e Outros.
+- **Bot Interativo do Telegram**:
   - `/start` ou `/ajuda`: Exibe guia e comandos.
   - `/baixar <número>`: Faz o download sob demanda de qualquer capítulo e envia para o chat.
   - `/ultimo`: Baixa e entrega o capítulo mais recente registrado.
   - `/check`: Força uma checagem online se há novidades no site.
-  - `/estado`: Mostra o último capítulo monitorado e timestamp.
-- 🌐 **Mini Servidor HTTP Integrado**: Endpoints para acionar checks, downloads e status via webhooks ou chamadas curl.
-- 🐳 **Pronto para Docker**: Deploy fácil com `docker-compose` e volume persistente para histórico e logs.
+  - `/estado`: Mostra o último capítulo baixado e timestamp.
+- **Mini Servidor HTTP Integrado**: Endpoints para acionar checks, downloads e status via webhooks ou chamadas curl.
+- **Pronto para Docker**: Deploy fácil com `docker-compose` e volume persistente para histórico e logs.
 
 ---
 
 ## 🛠️ Tecnologias Utilizadas
 
-- **Python 3.12** (apenas biblioteca padrão: `urllib`, `threading`, `http.server`, `subprocess`) — zero dependências pesadas externas!
+- **Python** (bibliotecas padrão: `urllib`, `threading`, `http.server`, `subprocess`)
 - **Telegram Bot API** (envio de documentos, mensagens formatadas e polling de updates)
 - **Docker & Docker Compose** (conteinerização e persistência)
 
@@ -83,8 +83,7 @@ python servidor.py
 
 ## 🔒 Segurança e Boas Práticas
 
-- **Nunca faça commit do seu arquivo `.env` com tokens reais.**
-- Utilize sempre o [.env.example](file:///DATA/AppData/poneglyph/.env.example) para versionamento no Git.
+- Utilize sempre o .env.example para versionamento no Git.
 - O volume `./dados` armazena o histórico (`ultimo_capitulo.json`), offset de mensagens e logs de envio.
 
 ---
