@@ -61,7 +61,7 @@ docker compose logs -f
 ```
 
 ### 4. Executar Localmente sem Docker
-Certifique-se de ter o `zip` instalado no sistema operacional (para geração do CBR).
+Basta executar diretamente com o Python (a geração do CBR usa a biblioteca padrão `zipfile`, sem necessidade de ferramentas externas):
 ```bash
 python servidor.py
 ```

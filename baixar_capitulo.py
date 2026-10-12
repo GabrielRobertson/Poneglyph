@@ -1,10 +1,9 @@
 import json
 import os
 import re
-import shutil
-import subprocess
 import sys
 import urllib.request
+import zipfile
 
 import telegram
 
@@ -60,21 +59,6 @@ def baixar_imagem(url, caminho):
     return True
 
 
-def caminho_rar():
-    for nome in ("rar", "winrar"):
-        caminho = shutil.which(nome)
-        if caminho:
-            return caminho
-    for p in (
-        r"C:\Program Files\WinRAR\Rar.exe",
-        r"C:\Program Files (x86)\WinRAR\Rar.exe",
-        r"C:\Program Files\WinRAR\WinRAR.exe",
-    ):
-        if os.path.exists(p):
-            return p
-    return None
-
-
 def criar_cbr(numero, pasta=PASTA_SAIDA):
     destino = os.path.join(pasta, f"capitulo-{numero}")
     if not os.path.isdir(destino):
@@ -88,21 +72,11 @@ def criar_cbr(numero, pasta=PASTA_SAIDA):
         return None
 
     arquivo_cbr = os.path.join(pasta, f"One Piece_{numero}.cbr")
+    print(f"Gerando {os.path.basename(arquivo_cbr)}...")
+    with zipfile.ZipFile(arquivo_cbr, "w", zipfile.ZIP_DEFLATED) as z:
+        for nome in imagens:
+            z.write(os.path.join(destino, nome), arcname=nome)
 
-    rar = caminho_rar()
-    if rar is None:
-        import zipfile
-        print(f"WinRAR nao encontrado, usando ZIP como fallback.")
-        with zipfile.ZipFile(arquivo_cbr + ".cbz", "w", zipfile.ZIP_DEFLATED) as z:
-            for nome in imagens:
-                z.write(os.path.join(destino, nome), arcname=nome)
-        shutil.move(arquivo_cbr + ".cbz", arquivo_cbr)
-        return arquivo_cbr
-
-    print(f"Convertendo para {os.path.basename(arquivo_cbr)}...")
-    lista = [os.path.join(destino, n) for n in imagens]
-    cmd = [rar, "a", "-ep1", "-idq", "-m5", arquivo_cbr] + lista
-    subprocess.run(cmd, check=False)
     return arquivo_cbr if os.path.exists(arquivo_cbr) else None
 
 
