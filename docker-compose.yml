@@ -1,0 +1,17 @@
+services:
+  poneglyph:
+    build: .
+    container_name: poneglyph
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    environment:
+      - PYTHONUNBUFFERED=1
+      - ESTADO_FILE=/app/dados/ultimo_capitulo.json
+      - PASTA_SAIDA=/app/dados
+      - PORTA=8000
+      - TELEGRAM_BOT_TOKEN=${TELEGRAM_BOT_TOKEN}
+      - TELEGRAM_CHAT_ID=${TELEGRAM_CHAT_ID}
+      - TELEGRAM_ENVIOS_LOG=/app/dados/envios_telegram.log
+    volumes:
+      - ./dados:/app/dados
