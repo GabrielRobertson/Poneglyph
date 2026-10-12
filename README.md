@@ -1,6 +1,9 @@
 # 🏴‍☠️ Poneglyph - One Piece Automation & Telegram Bot
 
+![Poneglyph Banner](assets/banner.jpg)
+
 > **Poneglyph** é um serviço autônomo em Python com Docker que monitora novos lançamentos de One Piece, faz o download automatizado das páginas em alta qualidade, gera arquivos de quadrinhos digitais (**CBR**) e entrega tudo diretamente no seu chat do Telegram com suporte a comandos interativos.
+
 
 ---
 
